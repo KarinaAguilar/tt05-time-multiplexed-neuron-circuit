@@ -8,7 +8,8 @@ module lif (
     output reg [7:0] state
 );
     //defines local vars
-    reg [7:0] next_state, threshold;
+    reg [7:0] threshold;
+    wire [7:0] next_state;
 
     always @(posedge clk) begin //@ positive clk edge do the following
         //if reset is high, then does the below [Note: ! inverts the bit]
