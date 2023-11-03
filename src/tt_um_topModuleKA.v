@@ -17,21 +17,28 @@ module tt_um_topModuleKA (
     
 
     //wire declarations
-    wire [7:0] in1, in2, out1, out2;
-    wire spike1, spike2;
+    wire [7:0] in1, in2, out1, out2, in3, out3, in4, out4;
+    wire spike1, spike2, spike3, spike4;
 
     //assigning inputs
-    assign in1 = {ui_in[7], 7'd0};
-    assign in2 = {ui_in[6], 7'd0};
+    //pair prop
+    assign in1 = {ui_in[7:4], 4'd0};
+    assign in2 = out1;
+
+    //pair prop
+    assign in3 = ui_in + 8'd10;
+    assign in4 = out3;
 
     
 
     // instantiate lif neuron
     lif lif1 (.current(in1), .clk(clk), .rst_n(rst_n), .spike(spike1), .state(out1));
     lif lif2 (.current(in2), .clk(clk), .rst_n(rst_n), .spike(spike2), .state(out2));
+    lif lif3 (.current(in3), .clk(clk), .rst_n(rst_n), .spike(spike3), .state(out3));
+    lif lif4 (.current(in4), .clk(clk), .rst_n(rst_n), .spike(spike4), .state(out4));
 
     //assigning outputs
-    assign uio_out = {6'd0, spike2, spike1};
+    assign uio_out = {5'd0, spike3, spike2, spike1};
     assign uo_out = {out1[7:4], out2[3:0]};
 
 

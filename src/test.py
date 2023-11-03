@@ -18,10 +18,16 @@ async def test_my_design(dut):
     await ClockCycles(dut.clk, 10)
     dut.rst_n.value = 1 #out of reset
 
-    dut.ui_in.value = CONSTANT_CURRENT
     dut.ena.value = 1 #enable design
 
-    for _ in range(100):
+    dut.ui_in.value = CONSTANT_CURRENT
+    await ClockCycles(dut.clk, 30)
+
+    CONSTANT_CURRENT = 45
+    dut.ui_in.value = CONSTANT_CURRENT
+    await ClockCycles(dut.clk, 10)
+
+    for _ in range(200):
         await RisingEdge(dut.clk)
 
     assert dut.ui_in.value == dut.ui_in.value
