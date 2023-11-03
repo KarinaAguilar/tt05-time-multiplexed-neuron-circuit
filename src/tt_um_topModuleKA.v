@@ -18,8 +18,8 @@ module tt_um_topModuleKA (
     
 
     //wire declarations
-    wire [7:0] in1, in2, out1, out2, in3, out3, in4, out4;
-    wire spike1, spike2, spike3, spike4, outmux;
+    wire [7:0] in1, in2, out1, out2, in3, out3, in4, out4, w0, w1;
+    wire spike1, spike2, spike3, spike4, shift_weight0, shift_weight1;
 
     //assigning inputs
     //pair prop
@@ -38,8 +38,9 @@ module tt_um_topModuleKA (
     lif lif3 (.current(in3), .clk(clk), .rst_n(rst_n), .spike(spike3), .state(out3));
     lif lif4 (.current(in4), .clk(clk), .rst_n(rst_n), .spike(spike4), .state(out4));
 
-    //muxing attempt
-    mux_cell mux1 (.a(spike1), .b(spike2), .sel(spike3), .out(outmux));
+    //weight multiplication
+    mux_2to1_8bit weight0 (.data0(8'd0), .data1(out2 >> 1), .sel(spike2), .out(w0)); //multiply by 2
+    mux_2to1_8bit weight1 (.data0(8'd0), .data1(out4 << 1), .sel(spike4), .out(w1)); //multiply by 2
 
     //assigning outputs
     assign uio_out = {4'd0, spike4, spike3, spike2, spike1};
