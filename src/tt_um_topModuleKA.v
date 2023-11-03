@@ -38,7 +38,7 @@ module tt_um_topModuleKA (
     lif lif4 (.current(in4), .clk(clk), .rst_n(rst_n), .spike(spike4), .state(out4));
 
     //assigning outputs
-    assign uio_out = {5'd0, spike3, spike2, spike1};
+    assign uio_out = {4'd0, spike4, spike3, spike2, spike1};
     assign uo_out = {out1[7:4], out2[3:0]};
 
 
