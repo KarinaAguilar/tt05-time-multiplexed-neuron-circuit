@@ -22,7 +22,7 @@ module tt_um_topModuleKA (
 
     //assigning inputs
     assign in1 = {ui_in[7], 7'd0};
-    assign in1 = {ui_in[6], 7'd0};
+    assign in2 = {ui_in[6], 7'd0};
 
     
 
