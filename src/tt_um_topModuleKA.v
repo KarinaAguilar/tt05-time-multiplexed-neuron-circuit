@@ -22,14 +22,17 @@ module tt_um_topModuleKA (
 
     //assigning inputs
     assign in1 = {ui_in[7], 7'd0};
+    assign in1 = {ui_in[6], 7'd0};
 
-    //assigning outputs
-    assign uio_out[7:0] = {6'd0, spike2, spike1};
+    
 
     // instantiate lif neuron
     lif lif1 (.current(in1), .clk(clk), .rst_n(rst_n), .spike(spike1), .state(out1));
     lif lif2 (.current(in2), .clk(clk), .rst_n(rst_n), .spike(spike2), .state(out2));
 
+    //assigning outputs
+    assign uio_out = {6'd0, spike2, spike1};
+    assign uo_out = {out1[7:4], out2[3:0]};
 
 
 endmodule
