@@ -11,6 +11,7 @@ module tt_um_topModuleKA (
     input  wire       rst_n     // reset_n - low to reset
 );
 
+    
 
     // use bidirectionals as outputs
     assign uio_oe = 8'b11111111;
@@ -18,7 +19,7 @@ module tt_um_topModuleKA (
 
     //wire declarations
     wire [7:0] in1, in2, out1, out2, in3, out3, in4, out4;
-    wire spike1, spike2, spike3, spike4;
+    wire spike1, spike2, spike3, spike4, outmux;
 
     //assigning inputs
     //pair prop
@@ -36,6 +37,9 @@ module tt_um_topModuleKA (
     lif lif2 (.current(in2), .clk(clk), .rst_n(rst_n), .spike(spike2), .state(out2));
     lif lif3 (.current(in3), .clk(clk), .rst_n(rst_n), .spike(spike3), .state(out3));
     lif lif4 (.current(in4), .clk(clk), .rst_n(rst_n), .spike(spike4), .state(out4));
+
+    //muxing attempt
+    mux_cell mux1 (.a(spike1), .b(spike2), .sel(spike3), .out(outmux));
 
     //assigning outputs
     assign uio_out = {4'd0, spike4, spike3, spike2, spike1};
