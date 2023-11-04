@@ -18,8 +18,10 @@ module tt_um_topModuleKA (
     
 
     //wire declarations
-    wire [7:0] in1, in2, out1, out2, in3, out3, in4, out4, w0, w1, r;
-    wire spike1, spike2, spike3, spike4;
+    wire [7:0] in1, in2, out1, out2, in3, out3, in4, out4, w0, w1, r, in5, out5, w2;
+    wire spike1, spike2, spike3, spike4, spike5;
+
+    LSFR random (.clk(clk), .rnd(r), .rst_n(rst_n));
 
     //assigning inputs
     //pair prop
@@ -30,8 +32,9 @@ module tt_um_topModuleKA (
     assign in3 = ui_in + 8'd10;
     assign in4 = out3;
 
+    //one neuron that has random current input
+    assign in5 = r;
     
-    LSFR random (.clk(clk), .rnd(r), .rst_n(rst_n));
 
     // instantiate lif neuron
     lif lif1 (.current(in1), .clk(clk), .rst_n(rst_n), .spike(spike1), .state(out1));
@@ -40,13 +43,17 @@ module tt_um_topModuleKA (
     lif lif3 (.current(in3), .clk(clk), .rst_n(rst_n), .spike(spike3), .state(out3));
     lif lif4 (.current(in4), .clk(clk), .rst_n(rst_n), .spike(spike4), .state(out4));
 
+    lif lif5 (.current(in5), .clk(clk), .rst_n(rst_n), .spike(spike5), .state(out5));
+
     //weight multiplication
-    mux_2to1_8bit weight0 (.data0(8'd0), .data1(out2 >> r[2:0]), .sel(spike2), .out(w0)); //multiply by 2
+    mux_2to1_8bit weight0 (.data0(8'd0), .data1(out2 >> r[2:0]), .sel(spike2), .out(w0)); //multiply by random number 0-7
     mux_2to1_8bit weight1 (.data0(8'd0), .data1(out4 << 1), .sel(spike4), .out(w1)); //divide by 2
+    mux_2to1_8bit weight2 (.data0(8'd0), .data1(out5 >> r[4:3]), .sel(spike5), .out(w2)); //multiply by random number 0-7 but from diff portion
 
     //assigning outputs
-    assign uio_out = {4'd0, spike4, spike3, spike2, spike1};
-    assign uo_out = {out1[7:4], out2[3:0]};
+    assign uio_out = {3'd0, spike5, spike4, spike3, spike2, spike1};
+ 
+    mux_8to1_8bit muxing (.sel(r[1:0]), .data0(out1), .data1(out2), .data2(out3), .data3(out4), .data4(out5), .data5(w0), .data6(w1), .data7(w2), .y(uo_out));
 
 
 endmodule

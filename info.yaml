@@ -11,6 +11,7 @@ project:
     - LSFR.v
     - fdre.v
     - fdre_reset1.v
+    - mux_8to1_8bit.v
   top_module:  "tt_um_topModuleKA"      # Put the name of your top module here, must start with "tt_um_". Make it unique by including your github username
 
 # How many tiles your design occupies? A single tile is about 167x108 uM.
@@ -68,7 +69,7 @@ documentation:
     - spike bit 2
     - spike bit 3
     - spike bit 4
-    - unspecified
+    - spike bit 5
     - unspecified
     - unspecified
     - unspecified
