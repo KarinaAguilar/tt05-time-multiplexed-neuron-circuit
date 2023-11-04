@@ -19,7 +19,7 @@ module tt_um_topModuleKA (
 
     //wire declarations
     wire [7:0] in1, in2, out1, out2, in3, out3, in4, out4, w0, w1, r;
-    wire spike1, spike2, spike3, spike4, shift_weight0, shift_weight1;
+    wire spike1, spike2, spike3, spike4;
 
     //assigning inputs
     //pair prop
