@@ -36,11 +36,12 @@ module tt_um_topModuleKA (
     // instantiate lif neuron
     lif lif1 (.current(in1), .clk(clk), .rst_n(rst_n), .spike(spike1), .state(out1));
     lif lif2 (.current(in2), .clk(clk), .rst_n(rst_n), .spike(spike2), .state(out2));
+    
     lif lif3 (.current(in3), .clk(clk), .rst_n(rst_n), .spike(spike3), .state(out3));
     lif lif4 (.current(in4), .clk(clk), .rst_n(rst_n), .spike(spike4), .state(out4));
 
     //weight multiplication
-    mux_2to1_8bit weight0 (.data0(8'd0), .data1(out2 >> 1), .sel(spike2), .out(w0)); //multiply by 2
+    mux_2to1_8bit weight0 (.data0(8'd0), .data1(out2 >> r[2:0]), .sel(spike2), .out(w0)); //multiply by 2
     mux_2to1_8bit weight1 (.data0(8'd0), .data1(out4 << 1), .sel(spike4), .out(w1)); //divide by 2
 
     //assigning outputs
