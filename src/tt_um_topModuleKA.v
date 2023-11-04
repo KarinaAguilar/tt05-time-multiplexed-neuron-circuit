@@ -52,6 +52,7 @@ module tt_um_topModuleKA (
 
     //assigning outputs
     assign uio_out = {3'd0, spike5, spike4, spike3, spike2, spike1};
+    assign uo_out = {w2[7], w1[6], w0[5], out5[4], out4[3], out3[2], out2[1], out1[0]};
  
     //mux_8to1_8bit muxing (.sel(r[1:0]), .data0(out1), .data1(out2), .data2(out3), .data3(out4), .data4(out5), .data5(w0), .data6(w1), .data7(w2), .y(uo_out));
 
