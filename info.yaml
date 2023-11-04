@@ -9,6 +9,8 @@ project:
     - tt_um_topModuleKA.v
     - lif.v
     - LSFR.v
+    - fdre.v
+    - fdre_reset1.v
   top_module:  "tt_um_topModuleKA"      # Put the name of your top module here, must start with "tt_um_". Make it unique by including your github username
 
 # How many tiles your design occupies? A single tile is about 167x108 uM.

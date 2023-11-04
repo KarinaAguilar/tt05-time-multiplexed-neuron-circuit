@@ -31,7 +31,7 @@ module tt_um_topModuleKA (
     assign in4 = out3;
 
     
-    // LSFR rand (.clk(clk), .rnd(r));
+    LSFR random (.clk(clk), .rnd(r), .rst_n(rst_n));
 
     // instantiate lif neuron
     lif lif1 (.current(in1), .clk(clk), .rst_n(rst_n), .spike(spike1), .state(out1));
